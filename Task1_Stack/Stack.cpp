@@ -1,5 +1,4 @@
 ﻿#include <iostream>
-using namespace std;
 
 struct STACK {
     char c;
@@ -8,6 +7,63 @@ struct STACK {
 
 
 using Node = STACK*;
+
+void push(Node& Top, char c);
+char pop(Node& Top);
+char peek(Node& Top);
+inline bool isEmpty(Node& Top);
+
+
+int main()
+{
+    Node stack = nullptr;
+
+    char br_open[4] = { "({[" }; // Открывющиеся скобки.
+    char br_close[4] = { ")}]" }; // Закрывающиеся скобки.
+
+    char* str; // Вводимая строка.
+    str = new char[20];
+    std::cin >> str; // Пользователь вводит выражение.
+    bool flag = true;
+
+    for (int i = 0; str[i]; i++) {
+
+        flag = true;
+        for (int k = 0; br_open[k]; k++) {
+            // Проверка, есть ли открывающиеся скобка.
+            if (str[i] == br_open[k]) {
+                push(stack, str[i]);
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag == true) {
+            for (int k = 0;  br_close[k]; k++) {
+                // Проверка, есть ли закрывающиеся скобка.
+                if (str[i] == br_close[k]) {
+                    if (peek(stack) == br_open[k]) {
+                        pop(stack);
+                        break;
+                    }
+                    else {
+                        push(stack, str[i]);
+                    }
+                }
+
+            }
+        }
+
+    }
+    std::cout << std::boolalpha << "\nIs Stack Empty = " << isEmpty(stack) << std::endl; // Проверка, если стэк пуст.
+    if (isEmpty(stack))
+        std::cout << "\nExpression is correct!" << std::endl; // Вывод сообщения, если выражение верное.
+    else
+        std::cout << "\nExpression is not correct!"; // Вывод сообщения, если выражение неверное..
+
+    delete[] str;
+    system("pause > nul");
+}
 
 // Добавление узла (в вершину стэка).
 void push(Node& Top, char c) {
@@ -39,55 +95,4 @@ char peek(Node& Top) {
 // Проверка если узел пуст.
 inline bool isEmpty(Node& Top) {
     return Top == nullptr;
-}
-
-int main()
-{
-    Node stack = nullptr;
-
-    char br_open[3] = { '(', '[', '{' }; // Открывющиеся скобки.
-    char br_close[3] = { ')', ']', '}' }; // Закрывающиеся скобки.
-    int n_br1 = sizeof(br_open) / sizeof(decltype(br_open[0]));
-    int n_br2 = sizeof(br_close) / sizeof(decltype(br_close[0]));
-
-    char str[80]{ "{(1 + 2) + [(3-7) - x] + 4}" }; // Вводимая строка.
-    int n = strlen(str); // Длина строки str.
-    bool flag = true;
-
-    for (int i = 0; i < n; i++) {
-
-        flag = true;
-        for (int k = 0; k < n_br1; k++) {
-            // Проверка, есть ли открывающиеся скобка.
-            if (str[i] == br_open[k]) {
-                push(stack, str[i]);
-                flag = false;
-                break;
-            }
-        }
-
-        if (flag == true) {
-            for (int k = 0; k < n_br2; k++) {
-                // Проверка, есть ли закрывающиеся скобка.
-                if (str[i] == br_close[k]) {
-                    if (peek(stack) == br_open[k]) {
-                        pop(stack);
-                        break;
-                    }
-                    else {
-                        push(stack, str[i]);
-                    }
-                }
-
-            }
-        }
-
-    }
-    cout << boolalpha << "\nIs Stack Empty = " << isEmpty(stack) << endl;
-    if (isEmpty(stack))
-        cout << "\nExpression is correct!" << endl;
-    else
-        cout << "\nExpression is not correct!";
-
-    system("pause > nul");
 }
