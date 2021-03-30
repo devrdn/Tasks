@@ -14,8 +14,9 @@ int main () {
     str = new char[20];
     printf(">> Enter new String: ");
     gets(str); // Enter the string.
-    printString(str);
-    if ( (pos1 = pos('<', str)) == -1  || (pos2 = pos('>', str)) == -1 ) printf("\nString doesn't contains both symbols: '<' and '>'.");
+    printString(str); // Output string str.
+    if ((pos1 = pos('<', str)) == -1  || (pos2 = pos('>', str)) == -1)
+        printf("\nString doesn't contains both symbols: '<' and '>'.");
     else {
         if (pos1 == 0 && pos2 == strlen(str) - 1)
             printf("\nAll word is Between <>.");
@@ -23,7 +24,7 @@ int main () {
             printf("\nThe position of the element '>' is earlier than the position of the element '<'.");
         else {
             do {
-                deleteSymbols(str, pos1, pos2);
+                deleteSymbols(str, pos1, pos2); // Delete symbols from pos1 to pos2.
                 pos1 = pos('<', str, 'F');
                 pos2 = pos('>', str);
             } while (pos1 != -1 && pos2 != -1);
