@@ -28,6 +28,7 @@ int main () {
                "1) First condition\n"
                "2) Second condition\n"
                "3) Third condition\n"
+               "4) Exit.\n"
                "> ");
         sel = getche();
         printf("\n>> Enter String > ");
@@ -94,7 +95,7 @@ int main () {
         delete[] str;
         system("pause > nul");
 
-    } while (sel != 'c');
+    } while (sel != '4');
     system("pause > nul");
 }
 
