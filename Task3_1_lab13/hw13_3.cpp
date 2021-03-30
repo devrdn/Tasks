@@ -111,7 +111,7 @@ void printString(char * _str) {
 }
 
 void backWord(char * _str) {
-    // Написать строку _str наоборот.
+    // Вывести строку _str наоборот.
     printf(" ");
     for(int i = strlen(_str); i >= 0; i--) {
         printf("%c", _str[i]);
