@@ -3,12 +3,11 @@
 #include <color.h>
 #include <string>
 #include <iostream>
-#define MAX_SIZE 40
 
 using namespace std;
 
-inline bool isLastSymbol(char * str, char);
-inline bool isFirstSymbol(char * str, char);
+inline bool isLastSymbol(char *, char);
+inline bool isFirstSymbol(char *, char);
 inline bool isDivide(int, int);
 void backWord(char *);
 void printString(char *);
