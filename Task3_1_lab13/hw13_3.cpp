@@ -35,8 +35,6 @@ int main () {
         gets(str);
         printString(str);
 
-
-
         switch(sel) {
 
             // Первое условие.
